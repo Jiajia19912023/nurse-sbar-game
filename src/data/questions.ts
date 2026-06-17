@@ -172,6 +172,68 @@ export function getQuestions(gender: Gender): Question[] {
   },
   {
     id: 'q5',
+    scene: 'SBAR — Background',
+    question:
+      '医師への電話報告を続ける。次はBackground（背景・経過）を伝える番だ。\nBackgroundとして最も適切なのはどれ？',
+    choices: [
+      {
+        id: 'A',
+        text: '田中さんは80代男性、COPD急性増悪疑いで入院中。昨夜から呼吸数増加傾向があり、本日は体温37.8℃、HR 116、RR 30、SpO2 88%（room air）、wheeze聴取しています。',
+        isCorrect: true,
+      },
+      {
+        id: 'B',
+        text: '田中さんは昨日夕食を半量しか食べられていません。睡眠は良好で、夜間の訴えもありませんでした。',
+        isCorrect: false,
+      },
+      {
+        id: 'C',
+        text: '田中さんはCOPDで入院しています。もともと呼吸が少し悪い方です。今日も特に変わりなく経過していました。',
+        isCorrect: false,
+      },
+    ],
+    correctExplanation:
+      '正解です。BackgroundはSBARの「B」。患者の背景と現在に至る経過を客観的に伝えます。年齢・診断名・経過（昨夜からの悪化傾向）・現在のバイタル数値をセットで伝えることで、医師が状況の重大性を正確に把握できます。',
+    wrongExplanations: {
+      B: '食事摂取量や睡眠状況は看護記録として重要ですが、急性呼吸困難の電話報告では優先情報ではありません。\nBackgroundには診断・入院経緯・バイタルの推移など、現在の問題に直結する臨床情報を含めます。',
+      C: '「特に変わりなく経過」という報告は客観的データと矛盾しています。\nHR 116、RR 30、SpO2 88%という数値がある以上、「変わりない」とは言えません。\n思い込みや曖昧な表現ではなく、数値で現状を正確に伝えることが重要です。',
+    },
+    background: '/assets/nurse_station.png',
+    character: '/assets/doctor_phone.png',
+  },
+  {
+    id: 'q6',
+    scene: 'SBAR — Assessment',
+    question:
+      'S・Bまで伝えた。次はAssessment（評価・判断）を伝える番だ。\nAssessmentとして最も適切なのはどれ？',
+    choices: [
+      {
+        id: 'A',
+        text: '所見からCOPD急性増悪が進行していると考えます。SpO2 88%・RR 30・wheeze・短文会話という組み合わせから、早急な対応が必要と判断しました。',
+        isCorrect: true,
+      },
+      {
+        id: 'B',
+        text: 'COPDの患者さんなのでSpO2 88%はいつものことかもしれません。念のご報告ですので、お手すきの際にご確認いただければと思います。',
+        isCorrect: false,
+      },
+      {
+        id: 'C',
+        text: '何が起きているかは先生に判断していただきたいです。私には評価は難しいです。',
+        isCorrect: false,
+      },
+    ],
+    correctExplanation:
+      '正解です。AssessmentはSBARの「A」。観察したデータをもとに「自分はこう判断した」を伝えます。新人でも根拠つきで見立てを述べることが重要です。これにより医師が優先度を即座に判断できます。',
+    wrongExplanations: {
+      B: '「COPDだから88%はいつものこと」は根拠のない判断です。\nRR 30、短文会話、wheezeが加わっている時点で急性悪化のサインです。\n「念のご報告」という表現は緊急度を著しく下げてしまいます。',
+      C: '最終的な治療判断は医師が行いますが、看護師がAssessmentを伝えないと医師も状況の緊急度を判断しにくくなります。\n観察したデータをもとに自分の見立てを伝えることが、SBAR報告の「A」の役割です。',
+    },
+    background: '/assets/nurse_station.png',
+    character: '/assets/doctor_phone.png',
+  },
+  {
+    id: 'q7',
     scene: 'SBAR — Recommendation',
     question:
       '医師にS・B・Aまで伝えた。最後にRecommendationを伝える必要がある。\nRecommendationとして最も適切なのはどれ？',
@@ -307,20 +369,20 @@ export function getQuestions(gender: Gender): Question[] {
       },
       {
         id: 'B',
-        text: '髪の長さが変わっていないか。',
+        text: 'SpO2の値がさらに低下していないか定期的に確認する。',
         isCorrect: false,
       },
       {
         id: 'C',
-        text: '妻が何時に面会に来るか。',
+        text: '呼吸回数がさらに上昇していないか観察する。',
         isCorrect: false,
       },
     ],
     correctExplanation:
-      '正解です。CO2貯留（高炭酸ガス血症）では、眠気・混乱・意識レベルの低下・頭痛・手の振戦（asterixis）などが出現します。SpO2だけでなく意識状態の変化も観察します。',
+      '正解です。CO2貯留（高炭酸ガス血症）では、眠気・混乱・意識レベルの低下・頭痛・手の振戦（asterixis）などが出現します。CO2は中枢神経を抑制するため、SpO2だけでなく意識状態の変化を観察することが重要です。',
     wrongExplanations: {
-      B: '髪の長さはCO2貯留の観察項目ではない。\nCO2貯留では、眠気、混乱、反応低下、意識レベル低下に注意する。',
-      C: '面会時間そのものはCO2貯留の判断材料ではない。\nただし妻が「いつもよりぼーっとしている」と言った場合は重要な情報になる。',
+      B: 'SpO2は酸素化（低酸素血症）の指標であり、CO2貯留の直接評価には使えない。\nCOPDでCO2が貯留しても、SpO2が目標範囲に見えることがある。\nCO2貯留を疑うときは眠気・混乱・意識レベル低下など中枢神経症状を確認する。',
+      C: '呼吸回数の観察は重要だが、CO2貯留が進行すると呼吸中枢が抑制され、かえって呼吸数が減少したり浅くなることがある。\n「返事が遅い」「眠気が強い」など意識変化のほうがCO2貯留のより特異的なサインになる。',
     },
     background: '/assets/nurse_station.png',
     character: '/assets/senior_nurse_normal.png',

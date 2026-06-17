@@ -240,7 +240,7 @@ export default function App() {
                     onClick={() => { unlockAudio(); sound.startBGM(); resumeGame(); }}
                     className="bg-blue-600 text-white text-sm font-black px-7 py-2.5 rounded-full shadow-lg hover:bg-blue-700 active:scale-95 transition-all border-2 border-blue-400"
                   >
-                    📖 続きから（Q{savedData.qIdx + 1}/10　♥{savedData.mental}）
+                    📖 続きから（Q{savedData.qIdx + 1}/{questions.length}　♥{savedData.mental}）
                   </button>
                   <button
                     onClick={() => { sound.click(); deleteSave(); setScreen('select'); }}
