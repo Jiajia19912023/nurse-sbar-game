@@ -29,13 +29,13 @@ function ac(): AudioContext {
 /* ─────────────────────────────────────
    効果音（tone）
 ───────────────────────────────────── */
-function tone(freq: number, dur: number, wave: OscillatorType = 'sine', vol = 0.3, delay = 0) {
+function tone(freq: number, dur: number, wave: OscillatorType = 'sine', vol = 0.3, delay = 0, dest?: AudioNode) {
   try {
     const c = ac();
     const osc  = c.createOscillator();
     const gain = c.createGain();
     osc.connect(gain);
-    gain.connect(c.destination);
+    gain.connect(dest ?? c.destination); // BGMメロディはマスター経由→フェードで一緒に消える
     osc.type = wave;
     osc.frequency.setValueAtTime(freq, c.currentTime + delay);
     gain.gain.setValueAtTime(0.001, c.currentTime + delay);
@@ -144,7 +144,7 @@ const AMBIENT_MELODY: [number, number, number][] = [
 ];
 function runAmbientMelody() {
   if (currentMode !== 'ambient') return;
-  AMBIENT_MELODY.forEach(([f,d,dl]) => tone(f, d, 'sine', 0.055, dl));
+  AMBIENT_MELODY.forEach(([f,d,dl]) => tone(f, d, 'sine', 0.69, dl, ambientMaster ?? undefined));
   ambientMelTimer = setTimeout(runAmbientMelody, 10_000);
 }
 
@@ -155,7 +155,7 @@ const TENSE_MOTIF: [number, number, number][] = [
 ];
 function runTenseMotif() {
   if (currentMode !== 'tense') return;
-  TENSE_MOTIF.forEach(([f,d,dl]) => tone(f, d, 'triangle', 0.07, dl));
+  TENSE_MOTIF.forEach(([f,d,dl]) => tone(f, d, 'triangle', 0.70, dl, tenseMaster ?? undefined));
   tenseMotifTimer = setTimeout(runTenseMotif, 8_000);
 }
 
@@ -163,8 +163,8 @@ function runTenseMotif() {
 const PULSE_INTERVAL_MS = (60 / 90) * 1000; // 90 BPM
 function runPulse() {
   if (currentMode !== 'tense') return;
-  tone(60, 0.10, 'triangle', 0.18);
-  setTimeout(() => { if (currentMode === 'tense') tone(55, 0.08, 'triangle', 0.10); }, 200);
+  tone(60, 0.10, 'triangle', 1.8, 0, tenseMaster ?? undefined);
+  setTimeout(() => { if (currentMode === 'tense') tone(55, 0.08, 'triangle', 1.0, 0, tenseMaster ?? undefined); }, 200);
   pulseTimer = setTimeout(runPulse, PULSE_INTERVAL_MS);
 }
 
@@ -175,7 +175,7 @@ const CLEAR_MELODY: [number, number, number][] = [
 ];
 function runClearMelody() {
   if (currentMode !== 'clear') return;
-  CLEAR_MELODY.forEach(([f,d,dl]) => tone(f, d, 'sine', 0.06, dl));
+  CLEAR_MELODY.forEach(([f,d,dl]) => tone(f, d, 'sine', 0.60, dl, clearMaster ?? undefined));
   clearMelTimer = setTimeout(runClearMelody, 9_000);
 }
 
@@ -185,7 +185,7 @@ const GAMEOVER_MELODY: [number, number, number][] = [
 ];
 function runGameoverMelody() {
   if (currentMode !== 'gameover') return;
-  GAMEOVER_MELODY.forEach(([f,d,dl]) => tone(f, d, 'triangle', 0.06, dl));
+  GAMEOVER_MELODY.forEach(([f,d,dl]) => tone(f, d, 'triangle', 0.55, dl, gameoverMaster ?? undefined));
   gameoverMelTimer = setTimeout(runGameoverMelody, 11_000);
 }
 
