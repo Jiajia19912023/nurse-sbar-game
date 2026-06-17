@@ -56,7 +56,7 @@ const VITALS_INFO = `時刻：10:00
 心拍数：116 /min
 血圧：146/82 mmHg
 呼吸数：30 /min
-SpO2：88% room air
+SpO2：85% ルームエアー（RA）
 意識：清明
 呼吸状態：短文なら会話可能、wheezeあり
 痰：黄色痰あり`;

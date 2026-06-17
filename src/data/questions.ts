@@ -38,7 +38,7 @@ export function getIntroScenes(name: string, gender: Gender): IntroScene[] {
     {
       background: '/assets/patient_room.png',
       character: null,
-      text: `${name}はバイタルを測った。\n\n体温 37.8℃　心拍数 116 /min\n血圧 146/82 mmHg　呼吸数 30 /min\nSpO2 88% room air\n\n呼吸音を確認すると——ヒューヒューという音が聞こえた。\n\n（これは…普通じゃない）`,
+      text: `${name}はバイタルを測った。\n\n体温 37.8℃　心拍数 116 /min\n血圧 146/82 mmHg　呼吸数 30 /min\nSpO2 85% ルームエアー（RA）\n\n呼吸音を確認すると——ヒューヒューという音が聞こえた。\n\n（これは…普通じゃない）`,
     },
   ];
 }
@@ -53,7 +53,7 @@ export function getQuestions(gender: Gender): Question[] {
     choices: [
       {
         id: 'A',
-        text: 'すみません、田中さんの呼吸状態について今相談してもいいですか。SpO2 88%、RR 30で、会話も短文です。',
+        text: 'すみません、田中さんの呼吸状態で気になることがあるので、今相談してもいいですか。',
         isCorrect: true,
       },
       {
@@ -68,10 +68,10 @@ export function getQuestions(gender: Gender): Question[] {
       },
     ],
     correctExplanation:
-      '正解です。具体的なデータ（SpO2 88%、RR 30、短文会話）を最初に伝えることで、先輩が状況の緊急度を正確に判断できます。忙しそうでも患者安全を優先して声をかける姿勢が大切です。',
+      '正解です。先輩が忙しそうでも、患者本人が「大丈夫」と言っていても、気になる変化があればまず率直に声をかけて相談することが患者安全の第一歩です。具体的なデータの報告は、この次の段階で整理して伝えます。',
     wrongExplanations: {
-      B: '「たぶん大丈夫」という表現では、患者の危険度が伝わりにくい。\nSpO2 88%、RR 30、短文会話という具体的なデータを先に伝える必要がある。',
-      C: 'これは危険な判断。\n患者本人が「大丈夫」と言っていても、RR 30、SpO2 88%、短文会話は呼吸状態悪化のサイン。\n先輩が忙しそうでも、患者安全を優先して報告する必要がある。',
+      B: '「たぶん大丈夫」と前置きすると、せっかくの気づきや懸念が先輩に軽く受け取られてしまう。\n気になる変化があるときは、曖昧にせず率直に相談を切り出すことが大切。',
+      C: 'これは危険な判断。\n患者本人が「大丈夫」と言っていても、気になる変化があるなら様子見にせず声をかけるべき。\n先輩が忙しそうでも、患者安全を優先して相談する姿勢が必要。',
     },
     background: '/assets/nurse_station.png',
     character: '/assets/senior_nurse_strict.png',
@@ -89,7 +89,7 @@ export function getQuestions(gender: Gender): Question[] {
       },
       {
         id: 'B',
-        text: '田中さん、COPD急性増悪疑いです。SpO2 88%、RR 30、HR 116で、短文会話になっています。呼吸状態が悪化している可能性があるので相談したいです。',
+        text: '田中さん、COPD急性増悪疑いです。SpO2 85%、RR 30、HR 116で、短文会話になっています。呼吸状態が悪化している可能性があるので相談したいです。',
         isCorrect: true,
       },
       {
@@ -152,7 +152,7 @@ export function getQuestions(gender: Gender): Question[] {
       },
       {
         id: 'B',
-        text: 'COPD急性増悪疑いの田中さんが、呼吸困難を訴えており、SpO2 88%、RR 30です。',
+        text: '503号室の田中さんが、呼吸困難を訴えており、SpO2 85%、RR 30です。',
         isCorrect: true,
       },
       {
@@ -162,10 +162,10 @@ export function getQuestions(gender: Gender): Question[] {
       },
     ],
     correctExplanation:
-      '正解です。SituationはSBARの最初のS。「今何が起きているか」を一文で明確に伝えます。診断名＋症状＋数値で緊急度が伝わります。',
+      '正解です。SituationはSBARの最初のS。「誰の・今何が起きているか」を一文で明確に伝えます。患者の特定（号室・氏名）＋現在の症状＋数値で、緊急度が即座に伝わります。',
     wrongExplanations: {
       A: 'これはBackgroundに近い情報。\nSituationでは、今起きている問題を一文で伝える必要がある。',
-      C: '患者が酸素を嫌がっていることは補足情報としては使える。\nしかし最初に伝えるべきなのは、呼吸困難、SpO2 88%、RR 30という現在の危険度。',
+      C: '患者が酸素を嫌がっていることは補足情報としては使える。\nしかし最初に伝えるべきなのは、呼吸困難、SpO2 85%、RR 30という現在の危険度。',
     },
     background: '/assets/nurse_station.png',
     character: '/assets/doctor_phone.png',
@@ -178,7 +178,7 @@ export function getQuestions(gender: Gender): Question[] {
     choices: [
       {
         id: 'A',
-        text: '田中さんは80代男性、COPD急性増悪疑いで入院中。昨夜から呼吸数増加傾向があり、本日は体温37.8℃、HR 116、RR 30、SpO2 88%（room air）、wheeze聴取しています。',
+        text: '田中さんは80代男性、COPD急性増悪疑いで入院中。昨夜から呼吸数増加傾向があり、本日は体温37.8℃、HR 116、RR 30、SpO2 85%（ルームエアー／RA）、wheeze聴取しています。',
         isCorrect: true,
       },
       {
@@ -196,7 +196,7 @@ export function getQuestions(gender: Gender): Question[] {
       '正解です。BackgroundはSBARの「B」。患者の背景と現在に至る経過を客観的に伝えます。年齢・診断名・経過（昨夜からの悪化傾向）・現在のバイタル数値をセットで伝えることで、医師が状況の重大性を正確に把握できます。',
     wrongExplanations: {
       B: '食事摂取量や睡眠状況は看護記録として重要ですが、急性呼吸困難の電話報告では優先情報ではありません。\nBackgroundには診断・入院経緯・バイタルの推移など、現在の問題に直結する臨床情報を含めます。',
-      C: '「特に変わりなく経過」という報告は客観的データと矛盾しています。\nHR 116、RR 30、SpO2 88%という数値がある以上、「変わりない」とは言えません。\n思い込みや曖昧な表現ではなく、数値で現状を正確に伝えることが重要です。',
+      C: '「特に変わりなく経過」という報告は客観的データと矛盾しています。\nHR 116、RR 30、SpO2 85%という数値がある以上、「変わりない」とは言えません。\n思い込みや曖昧な表現ではなく、数値で現状を正確に伝えることが重要です。',
     },
     background: '/assets/nurse_station.png',
     character: '/assets/doctor_phone.png',
@@ -209,12 +209,12 @@ export function getQuestions(gender: Gender): Question[] {
     choices: [
       {
         id: 'A',
-        text: '所見からCOPD急性増悪が進行していると考えます。SpO2 88%・RR 30・wheeze・短文会話という組み合わせから、早急な対応が必要と判断しました。',
+        text: '所見からCOPD急性増悪が進行していると考えます。SpO2 85%・RR 30・wheeze・短文会話という組み合わせから、早急な対応が必要と判断しました。',
         isCorrect: true,
       },
       {
         id: 'B',
-        text: 'COPDの患者さんなのでSpO2 88%はいつものことかもしれません。念のご報告ですので、お手すきの際にご確認いただければと思います。',
+        text: 'COPDの患者さんなのでSpO2 85%はいつものことかもしれません。念のためのご報告ですので、お手すきの際にご確認いただければと思います。',
         isCorrect: false,
       },
       {
@@ -226,7 +226,7 @@ export function getQuestions(gender: Gender): Question[] {
     correctExplanation:
       '正解です。AssessmentはSBARの「A」。観察したデータをもとに「自分はこう判断した」を伝えます。新人でも根拠つきで見立てを述べることが重要です。これにより医師が優先度を即座に判断できます。',
     wrongExplanations: {
-      B: '「COPDだから88%はいつものこと」は根拠のない判断です。\nRR 30、短文会話、wheezeが加わっている時点で急性悪化のサインです。\n「念のご報告」という表現は緊急度を著しく下げてしまいます。',
+      B: '「COPDだから85%はいつものこと」は根拠のない判断です。\nRR 30、短文会話、wheezeが加わっている時点で急性悪化のサインです。\n「念のためのご報告」という表現は緊急度を著しく下げてしまいます。',
       C: '最終的な治療判断は医師が行いますが、看護師がAssessmentを伝えないと医師も状況の緊急度を判断しにくくなります。\n観察したデータをもとに自分の見立てを伝えることが、SBAR報告の「A」の役割です。',
     },
     background: '/assets/nurse_station.png',
@@ -327,13 +327,13 @@ export function getQuestions(gender: Gender): Question[] {
   },
   {
     id: 'q8',
-    scene: 'SpO2 88%への判断',
+    scene: 'SpO2 85%への判断',
     question:
-      '田中さんのSpO2は88% room air。RR 30、短文会話、wheezeあり。\n田中さんは「酸素なんかいらない。大丈夫」と言っている。\nこの時の判断として最も適切なのはどれ？',
+      '田中さんのSpO2は85% ルームエアー（RA）。RR 30、短文会話、wheezeあり。\n田中さんは「酸素なんかいらない。大丈夫」と言っている。\nこの時の判断として最も適切なのはどれ？',
     choices: [
       {
         id: 'A',
-        text: 'COPDではSpO2 88%は常に正常なので、何もしない。',
+        text: 'COPDではSpO2 85%は常に正常なので、何もしない。',
         isCorrect: false,
       },
       {
@@ -350,7 +350,7 @@ export function getQuestions(gender: Gender): Question[] {
     correctExplanation:
       '正解です。COPDでSpO2目標は88〜92%が多いですが、RR 30・短文会話・wheezeを総合すると悪化と判断できます。指示なく勝手に動かず、先輩・医師に報告して指示を仰ぐことが重要です。',
     wrongExplanations: {
-      A: '「COPDだからSpO2 88%なら常に正常」と決めつけるのは危険。\nRR 30、短文会話、wheezeがあるため、呼吸状態悪化を疑う。',
+      A: '「COPDだからSpO2 85%なら常に正常」と決めつけるのは危険。\nRR 30、短文会話、wheezeがあるため、呼吸状態悪化を疑う。',
       C: '低酸素には対応が必要。\nしかしCOPDではCO2貯留リスクも考える。\n最大量で酸素を入れるのではなく、目標SpO2と指示を確認する。',
     },
     background: '/assets/patient_room.png',
@@ -391,7 +391,7 @@ export function getQuestions(gender: Gender): Question[] {
     id: 'q10',
     scene: '最終判断',
     question:
-      '10:00。田中さんは「大丈夫」と言っているが、会話は短文になっている。\n最新バイタルはHR 116、RR 30、SpO2 88% room air、意識清明、wheezeあり、黄色痰あり。\n新人看護師として、次に取る行動で最も適切なのはどれ？',
+      '10:00。田中さんは「大丈夫」と言っているが、会話は短文になっている。\n最新バイタルはHR 116、RR 30、SpO2 85% ルームエアー（RA）、意識清明、wheezeあり、黄色痰あり。\n新人看護師として、次に取る行動で最も適切なのはどれ？',
     choices: [
       {
         id: 'A',
@@ -412,7 +412,7 @@ export function getQuestions(gender: Gender): Question[] {
     correctExplanation:
       '正解です。患者が「大丈夫」と言っていても、客観的データが悪化を示しているときは即座に行動します。新人は一人で判断せず、先輩に報告・相談することが患者安全の基本です。',
     wrongExplanations: {
-      B: 'これは危険な判断。\nRR 30、SpO2 88%、短文会話、wheezeがあるため、定時バイタルまで待つべきではない。',
+      B: 'これは危険な判断。\nRR 30、SpO2 85%、短文会話、wheezeがあるため、定時バイタルまで待つべきではない。',
       C: '根拠なく家族に「大丈夫です」と断言してはいけない。\n「呼吸が少し苦しそうなので、今から確認します」と伝える方が安全。',
     },
     background: '/assets/patient_room.png',
