@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About me — Jiajia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #FEF8EE;
+      --white: #FFFFFF;
+      --blue: #4F8FCF;
+      --blue-lt: #EEF5FF;
+      --green: #52A87A;
+      --yellow: #F0C030;
+      --pink: #F08AAE;
+      --red: #E05B5B;
+      --dark: #2A2A2A;
+      --gray: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic Pro', sans-serif;
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ========== ANIMATIONS ========== */
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes bounceIn {
+      0%   { opacity: 0; transform: scale(0.5) translateY(30px); }
+      60%  { opacity: 1; transform: scale(1.06) translateY(-6px); }
+      80%  { transform: scale(0.97) translateY(2px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.06); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -400% center; }
+      100% { background-position: 400% center; }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      40%       { opacity: 1; transform: scale(1.2) rotate(120deg); }
+      60%       { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+    @keyframes timelineDot {
+      0%   { opacity: 0; transform: scale(0); }
+      70%  { transform: scale(1.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes drawLine {
+      from { height: 0; opacity: 0; }
+      to   { height: 100%; opacity: 1; }
+    }
+    @keyframes slideInCard {
+      0%   { opacity: 0; transform: translateX(-30px); }
+      60%  { transform: translateX(6px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInCardRight {
+      0%   { opacity: 0; transform: translateX(30px); }
+      60%  { transform: translateX(-6px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.2); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.15); }
+      70%       { transform: scale(1); }
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-4deg); }
+      50%       { transform: rotate(4deg); }
+    }
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0) rotate(-15deg); }
+      70%  { transform: scale(1.1) rotate(3deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0); }
+    }
+    @keyframes typeIn {
+      from { clip-path: inset(0 100% 0 0); }
+      to   { clip-path: inset(0 0% 0 0); }
+    }
+
+    /* ========== NAV ========== */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(254,248,238,0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 2px solid rgba(240,192,48,0.3);
+    }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+      padding: 6px 14px;
+      background: var(--blue-lt);
+      border-radius: 20px;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      border: 1px solid rgba(79,143,207,0.3);
+    }
+    .nav-back:hover { background: var(--blue); color: white; transform: scale(1.05) translateX(-3px); }
+    .nav-logo {
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* ========== HERO ========== */
+
+    .page-hero {
+      position: relative;
+      padding: 40px 24px 32px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-blob-a {
+      position: absolute;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,192,48,0.3) 0%, transparent 70%);
+      top: -60px; left: -80px;
+      animation: float 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-blob-b {
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,143,207,0.2) 0%, transparent 70%);
+      bottom: -40px; right: -60px;
+      animation: float 9s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+    .page-eyebrow {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease 0.2s both;
+      margin-bottom: 8px;
+    }
+    .page-title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+      font-weight: 700;
+      opacity: 0;
+      animation: bounceIn 0.8s ease 0.4s both;
+      line-height: 1.2;
+    }
+    .page-title .jp {
+      display: block;
+      font-size: clamp(1.2rem, 5vw, 1.8rem);
+      color: var(--blue);
+      font-family: 'Caveat', cursive;
+      margin-top: 4px;
+    }
+    .page-spark {
+      position: absolute;
+      pointer-events: none;
+    }
+    .ps-1 { top: 15%; left: 8%;  font-size: 1.2rem; animation: sparkle 3s ease-in-out infinite 0s; }
+    .ps-2 { top: 20%; right: 9%; font-size: 1rem;   animation: sparkle 2.8s ease-in-out infinite 0.8s; }
+    .ps-3 { bottom: 15%; left: 12%; font-size: 1rem; animation: sparkle 3.5s ease-in-out infinite 1.5s; }
+    .ps-4 { bottom: 20%; right: 8%; font-size: 1.2rem; animation: sparkle 3.2s ease-in-out infinite 0.4s; }
+
+    /* ========== PROFILE CHIP ========== */
+
+    .profile-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 2px solid rgba(240,192,48,0.5);
+      border-radius: 30px;
+      padding: 10px 20px;
+      margin: 20px auto 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      opacity: 0;
+      animation: bounceIn 0.7s ease 0.7s both;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    }
+    .profile-chip:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 10px 28px rgba(0,0,0,0.14); }
+    .profile-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--pink) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      animation: heartBeat 3s ease-in-out infinite;
+    }
+    .profile-info { text-align: left; }
+    .profile-name { font-family: 'Caveat', cursive; font-size: 1.2rem; font-weight: 700; line-height: 1; }
+    .profile-role { font-size: 0.7rem; color: var(--gray); margin-top: 2px; }
+
+    /* ========== TIMELINE ========== */
+
+    .timeline-section {
+      padding: 36px 20px 20px;
+      max-width: 520px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease 0.9s both;
+    }
+    .timeline-heading .icon {
+      display: inline-block;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--yellow), var(--blue), var(--green));
+      border-radius: 2px;
+      transform-origin: top;
+      animation: drawLine 1.5s ease 1s both;
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 22px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .tl-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Timeline dot */
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--blue);
+      background: var(--yellow);
+      z-index: 2;
+      animation: timelineDot 0.5s ease both;
+    }
+
+    .tl-item.special::before { background: var(--pink); box-shadow: 0 0 0 2px var(--pink); }
+    .tl-item.current::before {
+      background: var(--green);
+      box-shadow: 0 0 0 2px var(--green);
+      animation: timelineDot 0.5s ease both, pulse 2s ease-in-out infinite;
+    }
+
+    .tl-year {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+    .tl-text {
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .tl-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-top: 4px;
+    }
+    .badge-abroad { background: #FFF3E0; color: #E08020; }
+    .badge-canada { background: #FFE8EC; color: #CC2244; }
+    .badge-school { background: var(--blue-lt); color: var(--blue); }
+    .badge-work   { background: #E8F8F0; color: var(--green); }
+    .badge-now    { background: var(--green); color: white; animation: pulse 2s ease-in-out infinite; }
+
+    /* ========== YOUTUBE SECTION ========== */
+
+    .yt-section {
+      max-width: 520px;
+      margin: 0 auto 20px;
+      padding: 0 20px;
+    }
+
+    .yt-card {
+      background: linear-gradient(135deg, #FFF6F6 0%, #FFE8E8 100%);
+      border: 2px solid #FFBBBB;
+      border-radius: 24px;
+      padding: 24px 20px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s;
+    }
+    .yt-card.visible { opacity: 1; transform: translateY(0); }
+    .yt-card:hover { box-shadow: 0 12px 36px rgba(224,91,91,0.2); transform: translateY(-4px); }
+
+    .yt-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%);
+      background-size: 200% 100%;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .yt-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .yt-icon-big {
+      width: 44px; height: 30px;
+      background: #FF0000;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .yt-icon-big::after {
+      content: '';
+      border-left: 13px solid white;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      margin-left: 3px;
+    }
+    .yt-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .yt-story {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: #444;
+    }
+    .yt-story p + p { margin-top: 10px; }
+
+    .yt-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      background: #FF0000;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 4px 16px rgba(255,0,0,0.25);
+    }
+    .yt-link-btn:hover { transform: scale(1.06) translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,0,0.35); }
+
+    /* ========== FOOTER ========== */
+
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      background: linear-gradient(135deg, #EEF5FF 0%, #E8F8F0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--yellow), var(--pink), var(--green), var(--blue));
+      background-size: 200% 100%;
+      animation: shimmer 4s linear infinite;
+    }
+    .footer-logo {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--blue);
+      display: inline-block;
+      animation: float 4s ease-in-out infinite;
+      margin-bottom: 6px;
+    }
+    footer p { font-size: 0.72rem; color: var(--gray); }
+    footer .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+      margin-top: 8px;
+      padding: 5px 14px;
+      background: var(--blue-lt);
+      border-radius: 20px;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .back-link:hover { background: var(--blue); color: white; transform: scale(1.05); }
+
+    /* ========== CLOSING MESSAGE ========== */
+
+    .closing {
+      max-width: 520px;
+      margin: 24px auto;
+      padding: 20px 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .closing.visible { opacity: 1; transform: translateY(0); }
+    .closing-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.8;
+      color: #444;
+      background: linear-gradient(135deg, #FFFEF0, #FFF5CC);
+      border: 2px dashed #E8C840;
+      border-radius: 20px;
+      padding: 16px 20px;
+    }
+    .closing-text .highlight {
+      color: var(--blue);
+      font-family: 'Caveat', cursive;
+      font-size: 1.1em;
+    }
+
+    /* ========== SCROLL REVEAL ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-back" href="portfolio.html">← Back</a>
+    <div class="nav-logo">Jiajia 🐾</div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="hero-blob-a" aria-hidden="true"></div>
+    <div class="hero-blob-b" aria-hidden="true"></div>
+    <span class="page-spark ps-1" aria-hidden="true">✦</span>
+    <span class="page-spark ps-2" aria-hidden="true">✸</span>
+    <span class="page-spark ps-3" aria-hidden="true">♡</span>
+    <span class="page-spark ps-4" aria-hidden="true">＊</span>
+
+    <p class="page-eyebrow">はじめまして！</p>
+    <h1 class="page-title">
+      About me
+      <span class="jp">自己紹介</span>
+    </h1>
+
+    <div class="profile-chip">
+      <div class="profile-avatar" aria-hidden="true">🐱</div>
+      <div class="profile-info">
+        <p class="profile-name">Jiajia</p>
+        <p class="profile-role">看護師 × AI活用クリエーター</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <section class="timeline-section" aria-label="経歴タイムライン">
+    <h2 class="timeline-heading">
+      <span class="icon" aria-hidden="true">📝</span> 経歴
+    </h2>
+
+    <div class="timeline" id="timeline">
+
+      <div class="tl-item">
+        <p class="tl-year">2015年</p>
+        <p class="tl-text">短大卒業</p>
+        <span class="tl-badge badge-work">🎓 卒業</span>
+      </div>
+
+      <div class="tl-item">
+        <p class="tl-year">2015〜2019年</p>
+        <p class="tl-text">急性期病院で勤務（4年間）</p>
+        <span class="tl-badge badge-work">🏥 看護師</span>
+      </div>
+
+      <div class="tl-item special">
+        <p class="tl-year">2019〜2020年</p>
+        <p class="tl-text">アイルランドへの英語留学（約1年間）</p>
+        <span class="tl-badge badge-abroad">🍀 アイルランド</span>
+      </div>
+
+      <div class="tl-item">
+        <p class="tl-year">2020年</p>
+        <p class="tl-text">コロナで帰国</p>
+      </div>
+
+      <div class="tl-item">
+        <p class="tl-year">2020〜2021年</p>
+        <p class="tl-text">消化器外科、循環器内科病棟で勤務（1年）</p>
+        <span class="tl-badge badge-work">🏥 看護師</span>
+      </div>
+
+      <div class="tl-item">
+        <p class="tl-year">2021年</p>
+        <p class="tl-text">コロナ病棟勤務（半年）</p>
+        <span class="tl-badge badge-work">🏥 コロナ病棟</span>
+      </div>
+
+      <div class="tl-item special">
+        <p class="tl-year">2021年</p>
+        <p class="tl-text">カナダへ渡航、語学学校に通学（4ヶ月）</p>
+        <span class="tl-badge badge-canada">🍁 カナダ</span>
+      </div>
+
+      <div class="tl-item">
+        <p class="tl-year">2022年</p>
+        <p class="tl-text">就労ビザが出ないため一時帰国、院外病院で勤務（半年）</p>
+        <span class="tl-badge badge-work">🏥 看護師</span>
+      </div>
+
+      <div class="tl-item special">
+        <p class="tl-year">2023年9月</p>
+        <p class="tl-text">バンクーバーの看護師学科（NPIC）入学</p>
+        <span class="tl-badge badge-school">🍁 バンクーバー</span>
+        <span class="tl-badge badge-canada">📚 NPIC</span>
+      </div>
+
+      <div class="tl-item special">
+        <p class="tl-year">2024年12月</p>
+        <p class="tl-text">NPIC卒業</p>
+        <span class="tl-badge badge-school">🎓 卒業</span>
+      </div>
+
+      <div class="tl-item current">
+        <p class="tl-year">2025年4月〜現在</p>
+        <p class="tl-text">バンクーバーの病院、老年急性期病棟で正看護師として勤務中</p>
+        <span class="tl-badge badge-now">🌟 現在</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Closing message -->
+  <div class="closing" id="closing">
+    <p class="closing-text">
+      これからも、楽しく学び 成長し続けます！<br>
+      <span class="highlight">どうぞよろしくお願いします 🐾</span>
+    </p>
+  </div>
+
+  <!-- YouTube section -->
+  <section class="yt-section" aria-label="YouTubeを始めたきっかけ">
+    <div class="yt-card" id="ytCard">
+      <div class="yt-card-header">
+        <div class="yt-icon-big" aria-hidden="true"></div>
+        <h2 class="yt-card-title">YouTubeを始めたきっかけ</h2>
+      </div>
+      <div class="yt-story">
+        <p>
+          看護師として働く中で、「AIって実際どう使えるの？」という疑問から動画投稿を始めました。
+        </p>
+        <p>
+          最初はプログラミングも動画編集も全くの初心者でしたが、AIのサポートを受けながら少しずつスキルアップ。
+          今ではAIを使った医療ツールやゲームを自分でつくれるようになりました。
+        </p>
+        <p>
+          AIが普及する今、看護師の仕事がどう変わっていくかを一緒に考えていけたらと思い、
+          引き続き情報発信していきます！
+        </p>
+      </div>
+      <a class="yt-link-btn"
+         href="https://youtube.com/@jiajia1991-f3w?si=dlAct8TXQcBZN_HW"
+         target="_blank" rel="noopener noreferrer">
+        ▶ チャンネルを見る
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Jiajia 🐾</div>
+    <p>© 2025 Jiajia — AI × 看護師</p>
+    <br>
+    <a class="back-link" href="portfolio.html">← トップページへ戻る</a>
+  </footer>
+
+  <script>
+    /* ========== TIMELINE ITEMS STAGGERED REVEAL ========== */
+    (function() {
+      const items = document.querySelectorAll('.tl-item');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const idx = Array.from(items).indexOf(e.target);
+            setTimeout(() => e.target.classList.add('visible'), idx * 90);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      items.forEach(el => io.observe(el));
+    })();
+
+    /* ========== GENERAL REVEAL ========== */
+    (function() {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.yt-card, .closing, .reveal').forEach(el => io.observe(el));
+    })();
+
+    /* ========== SPARKLE on click ========== */
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      const symbols = ['✦','✸','★','♡'];
+      const colors  = ['#F0C030','#F08AAE','#4F8FCF','#52A87A'];
+      for (let i = 0; i < 5; i++) {
+        const el = document.createElement('span');
+        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        el.style.cssText = `
+          position: fixed;
+          left: ${e.clientX}px;
+          top: ${e.clientY}px;
+          pointer-events: none;
+          z-index: 9999;
+          font-size: ${0.7 + Math.random() * 0.7}rem;
+          color: ${colors[Math.floor(Math.random() * colors.length)]};
+          transition: transform 0.6s ease, opacity 0.6s ease;
+          opacity: 1;
+        `;
+        document.body.appendChild(el);
+        const angle = (i / 5) * Math.PI * 2 + Math.random() * 0.5;
+        const dist  = 25 + Math.random() * 35;
+        requestAnimationFrame(() => {
+          el.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist - 20}px) scale(0)`;
+          el.style.opacity = '0';
+        });
+        setTimeout(() => el.remove(), 650);
+      }
+    });
+  </script>
+</body>
+</html>
